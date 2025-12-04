@@ -1,0 +1,60 @@
+# Acessar o container PHP
+docker compose exec app bash
+
+# Dentro do container, criar projeto Laravel
+composer create-project laravel/laravel temp
+mv temp/* temp/.* . 2>/dev/null; rmdir temp
+
+# Instalar o starter kit com Inertia + Vue
+composer require laravel/breeze --dev
+php artisan breeze:install vue --typescript --pest
+
+# Sair do container
+exit
+
+# Instalar dependências do frontend
+docker compose exec node pnpm install
+
+
+
+Arquitetura Sugerida para Boas Práticas
+Para um projeto de portfólio impressionante, sugiro:
+
+├── app/
+│   ├── Actions/           # Single Action Classes(Uma Action é uma classe que faz uma única coisa. Segue o princípio de responsabilidade única (SRP). O nome da classe já diz exatamente o que ela faz.)
+│   ├── DTOs/              # Data Transfer Objects
+│   ├── Services/          # Business Logic (Um Service agrupa lógica de negócio relacionada e pode usar múltiplas Actions. É útil quando você tem operações complexas que envolvem várias etapas.)
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   ├── Requests/      # Form Requests (validação)
+│   │   └── Resources/     # API Resources
+│   └── Models/
+├── tests/
+│   ├── Feature/           # Testes de integração
+│   ├── Unit/              # Testes unitários
+│   └── Pest.php           # Configuração do Pest
+├── resources/
+│   └── js/
+│       ├── Pages/         # Páginas Inertia/Vue
+│       ├── Components/    # Componentes reutilizáveis
+│       └── Composables/   # Vue composables
+
+📊 Resumo: Quando usar cada um?
+Cenário	Use
+Operação simples e isolada	Action
+Lógica reutilizável específica	Action
+Orquestrar múltiplas operações	Service
+Lógica de negócio complexa	Service
+CRUD básico	Direto no Controller (sem over-engineering)
+Regra prática: Se você está repetindo lógica em vários controllers, extraia para uma Action. Se precisa combinar várias Actions, use um Service.
+
+Backend (Laravel):
+Ferramenta	Recomendação
+Pest PHP	⭐ ALTAMENTE RECOMENDADO - Sintaxe moderna, elegante, e Laravel 12 já vem com suporte nativo. Perfeito para portfólio!
+PHPUnit	Clássico, mas Pest é mais legível
+
+Frontend (Vue/Inertia):
+Ferramenta	Uso
+Vitest	Testes unitários (super rápido, integra com Vite)
+Vue Test Utils	Testar componentes Vue
+Playwright	Testes E2E (mais moderno que Cypress)
