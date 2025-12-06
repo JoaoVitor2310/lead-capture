@@ -1,0 +1,10 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/forms";
+
+@source "../views/**/*.blade.php";
+@source "../js/**/*.vue";
+@source "../js/**/*.ts";
+
+@theme {
+    --font-sans: 'Figtree', ui-sans-serif, system-ui, sans-serif;
+}
