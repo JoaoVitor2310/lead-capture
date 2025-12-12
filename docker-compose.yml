@@ -88,11 +88,10 @@ services:
     volumes:
       - ./:/var/www
     ports:
-      - "5174:5173"
+      - "5173:5173"
     networks:
       - lc_network
-    tty: true
-    stdin_open: true
+    command: sh -c "npm install && npm run dev -- --host"
 
 networks:
   lc_network:
