@@ -7,8 +7,8 @@ const sidebarOpen = ref(true)
 
 const menuItems = [
     { title: 'Dashboard', route: 'dashboard', icon: Home },
-    { title: 'Formulários', route: 'dashboard', icon: FileText }, // Mude para sua rota
-    { title: 'Configurações', route: 'dashboard', icon: Settings }, // Mude para sua rota
+    { title: 'Formulários', route: 'dashboard', icon: FileText },
+    { title: 'Configurações', route: 'dashboard', icon: Settings },
 ]
 </script>
 
