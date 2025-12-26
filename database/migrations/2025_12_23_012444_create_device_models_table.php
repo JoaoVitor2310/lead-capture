@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('device_line_id')->constrained()->cascadeOnDelete();
             $table->string('name')->comment('Pro, Pro Max, Mini, Air');
             $table->string('slug');
+            $table->text('description')->nullable()->comment('Description for the device model');
             $table->integer('order')->default(0);
             $table->boolean('active')->default(true);
             $table->timestamps();

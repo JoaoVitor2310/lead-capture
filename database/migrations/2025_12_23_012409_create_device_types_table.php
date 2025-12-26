@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->comment('iPhone, iPad, MacBook, Apple Watch');
             $table->string('slug')->unique();
+            $table->text('description')->nullable()->comment('Description for the device type');
             $table->string('icon')->nullable()->comment('Icon for the frontend');
             $table->integer('order')->default(0)->comment('Order for the display');
             $table->boolean('active')->default(true);
